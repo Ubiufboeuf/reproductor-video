@@ -1,0 +1,84 @@
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  height: 60px;
+  width: 100%;
+}
+
+header > #file-label {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+
+  display: grid;
+  place-items: center;
+  gap: 0;
+  margin: 0;
+  padding: 0 8px;
+  height: 40px;
+  width: 480px;
+}
+
+header > #file-label:hover {
+  border-color: #646cff;
+}
+
+header > #file-label:focus,
+header > #file-label:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+header > #file-label > #file-name {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+header #file-picker {
+  display: none;
+}
+
+main {
+  background: black;
+  height: calc(100% - 60px);
+  width: 100%;
+}
+
+main > #video-wrapper {
+  /* background: chocolate; */
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main > #video-wrapper > #video-player {
+  max-height: 100%;
+  max-width: 100%;
+  height: 100%;
+  width: 100%;
+}
+
+#mensaje {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
