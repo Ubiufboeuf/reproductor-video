@@ -12,7 +12,7 @@ function App() {
 
   function makeObjURL (file) {
     const local_url = URL.createObjectURL(file);
-    console.log("local_url: ", local_url)
+    // console.log("local_url: ", local_url)
     return local_url;
   }
 
@@ -20,9 +20,9 @@ function App() {
 
   useEffect(() => {
     if (file !== undefined) {
-      console.log("file: ", file);
+      // console.log("file: ", file);
       setFileName(file.name);
-      console.log("file.name: ", file.name);
+      // console.log("file.name: ", file.name);
       const local_url = makeObjURL(file);
       setUrl(local_url);
       setVideoSrc(local_url);

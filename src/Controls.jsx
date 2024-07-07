@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Maximize, Minimize, Mute, Pause, Play, Unmute } from "./assets/IconsSVG";
-import { Tiempo } from "./Tiempo"
 import "./Controls.css"
 
 export default function ({ player="null" }) {
@@ -8,7 +7,6 @@ export default function ({ player="null" }) {
   const [muteUnmute, setMuteUnmute] = useState("unmute")
   let [volumeValue, setVolumeValue] = useState(1);
   const [minMax, setMinMax] = useState("min");
-  const [tiempo, setTiempo] = useState();
 
   const [togglePP, setTogglePP] = useState(Play());
   const [toggleMU, setToggleMU] = useState(Unmute());
@@ -18,21 +16,22 @@ export default function ({ player="null" }) {
   vid_respaldo.setAttribute("autoPlay", "")
   vid_respaldo.setAttribute("id", "video-player")
   vid_respaldo.setAttribute("src", "undefined")
+  vid_respaldo.setAttribute("duration", 0);
   if (player === null) player = vid_respaldo;
   
   const playPauseF = () => setPlayPause((playPause === "play") ? "pause" : "play") 
   const muteUnmuteF = () => setMuteUnmute((muteUnmute === "mute") ? "unmute" : "mute")
   const minMaxF = () => setMinMax((minMax === "min") ? "max" : "min")
   
-  useEffect(() => {
-    if (playPause === "play") {
-      player.play();
-      setTogglePP(Pause());
-    } else {
-      player.pause();
-      setTogglePP(Play());
-    }
-  }, [playPause])
+  // useEffect(() => {
+  //   if (playPause === "play") {
+  //     player.play();
+  //     setTogglePP(Pause());
+  //   } else {
+  //     player.pause();
+  //     setTogglePP(Play());
+  //   }
+  // }, [playPause])
   
   useEffect(() => {
     if (muteUnmute === "mute") {
@@ -46,15 +45,12 @@ export default function ({ player="null" }) {
   
   useEffect(() => {
     if (minMax === "min") {
-      setToggleMM(Minimize());
-    } else {
       setToggleMM(Maximize());
+    } else {
+      setToggleMM(Minimize());
     }
   }, [minMax])
-
-  setTiempo(Tiempo(player))
-  console.log(tiempo)
-
+  
   return (
     <div id="controls">
       <div id="sub-controls">
