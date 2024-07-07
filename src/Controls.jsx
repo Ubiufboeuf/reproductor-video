@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Maximize, Minimize, Mute, Pause, Play, Unmute } from "./assets/IconsSVG";
+import { Tiempo } from "./Tiempo"
 import "./Controls.css"
 
 export default function ({ player="null" }) {
@@ -7,6 +8,7 @@ export default function ({ player="null" }) {
   const [muteUnmute, setMuteUnmute] = useState("unmute")
   let [volumeValue, setVolumeValue] = useState(1);
   const [minMax, setMinMax] = useState("min");
+  const [tiempo, setTiempo] = useState();
 
   const [togglePP, setTogglePP] = useState(Play());
   const [toggleMU, setToggleMU] = useState(Unmute());
@@ -24,7 +26,6 @@ export default function ({ player="null" }) {
   
   useEffect(() => {
     if (playPause === "play") {
-      player.currentTime = 306;
       player.play();
       setTogglePP(Pause());
     } else {
@@ -51,9 +52,8 @@ export default function ({ player="null" }) {
     }
   }, [minMax])
 
-  useEffect(() => {
-
-  })
+  setTiempo(Tiempo(player))
+  console.log(tiempo)
 
   return (
     <div id="controls">
