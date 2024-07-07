@@ -22,16 +22,19 @@ export default function ({ player="null" }) {
   const playPauseF = () => setPlayPause((playPause === "play") ? "pause" : "play") 
   const muteUnmuteF = () => setMuteUnmute((muteUnmute === "mute") ? "unmute" : "mute")
   const minMaxF = () => setMinMax((minMax === "min") ? "max" : "min")
+
+  const contados = document.querySelector("#contados")
+  const restantes = document.querySelector("#restantes")
   
-  // useEffect(() => {
-  //   if (playPause === "play") {
-  //     player.play();
-  //     setTogglePP(Pause());
-  //   } else {
-  //     player.pause();
-  //     setTogglePP(Play());
-  //   }
-  // }, [playPause])
+  useEffect(() => {
+    if (playPause === "play") {
+      player.play();
+      setTogglePP(Pause());
+    } else {
+      player.pause();
+      setTogglePP(Play());
+    }
+  }, [playPause])
   
   useEffect(() => {
     if (muteUnmute === "mute") {
@@ -50,6 +53,46 @@ export default function ({ player="null" }) {
       setToggleMM(Minimize());
     }
   }, [minMax])
+
+  let horas = 0;
+  let minutos = 0;
+  let segundos = 0;
+
+  let interval = setInterval(() => {
+    let local_time = 0;
+    local_time = Math.floor(player.currentTime);
+    if (local_time !== 0) {    
+      let parte1 = `${horas}:`;
+      let parte2 = `${minutos}:`
+      let parte3 = `${segundos}`
+
+      
+
+      if (minutos = 60) {
+        horas++
+        minutos -= 60
+      }
+
+      if (horas === 0) {
+        parte1 = ""
+      } else {
+        parte1 = `${horas}`
+      }
+      contados.textContent = `${parte1}${parte2}${parte3}`;
+    }
+  }, 500);
+
+  useEffect(() => {
+    if (player.duration !== NaN) {
+      try { 
+        if (restantes.textContent) {
+          restantes.textContent = player.duration
+        }
+      } catch (err) {
+
+      }
+    }
+  }, [player.duration])
   
   return (
     <div id="controls">
